@@ -2,7 +2,7 @@ import Layout from "@/components/layout";
 
 type Props = {};
 
-const Sprints = (props: Props) => {
+const Team = (props: Props) => {
   return (
     <Layout>
       <div>Sprints</div>
@@ -10,4 +10,4 @@ const Sprints = (props: Props) => {
   );
 };
 
-export default Sprints;
+export default Team;

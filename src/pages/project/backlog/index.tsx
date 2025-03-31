@@ -2,12 +2,12 @@ import Layout from "@/components/layout";
 
 type Props = {};
 
-const Sprints = (props: Props) => {
+const Backlog = (props: Props) => {
   return (
     <Layout>
-      <div>Sprints</div>
+      <div>Backlog</div>
     </Layout>
   );
 };
 
-export default Sprints;
+export default Backlog;

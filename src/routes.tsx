@@ -1,13 +1,15 @@
 import { createBrowserRouter } from "react-router-dom";
 import Login from "./pages/login";
 import Board from "./pages/project/board";
-import Planning from "./pages/project/planning";
+import Backlog from "./pages/project/backlog";
 import Sprints from "./pages/project/sprints";
 import Home from "./pages/home";
 import Register from "./pages/register";
 import Error from "./pages/error";
 import Projects from "./pages/projects";
 import ProtectedRoutes from "./components/ProtectedRoutes";
+import Tasks from "./pages/project/tasks";
+import Team from "./pages/project/team";
 
 export const router = createBrowserRouter([
   {
@@ -24,13 +26,23 @@ export const router = createBrowserRouter([
         errorElement: <Error />,
       },
       {
-        path: "/project/:id/planning",
-        element: <Planning />,
+        path: "/project/:id/backlog",
+        element: <Backlog />,
         errorElement: <Error />,
       },
       {
         path: "/project/:id/sprints",
         element: <Sprints />,
+        errorElement: <Error />,
+      },
+      {
+        path: "/project/:id/tasks",
+        element: <Tasks />,
+        errorElement: <Error />,
+      },
+      {
+        path: "/project/:id/team",
+        element: <Team />,
         errorElement: <Error />,
       },
     ],
