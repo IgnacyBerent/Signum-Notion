@@ -29,7 +29,7 @@ const Login = () => {
     e.preventDefault();
     try {
       await googleSignIn();
-      navigate("/projects");
+      navigate("/userDetails");
     } catch (error) {
       console.log("Error : ", error);
     }
@@ -40,7 +40,7 @@ const Login = () => {
     try {
       console.log("The user info is : ", userLogInInfo);
       await logIn(userLogInInfo.email, userLogInInfo.password);
-      navigate("/projects");
+      navigate("/userDetails");
     } catch (error) {
       console.log("Error : ", error);
     }
@@ -79,7 +79,7 @@ const Login = () => {
                 id="email"
                 label="Email address"
                 type="email"
-                placeholder="dipesh@example.com"
+                placeholder="email@example.com"
                 value={userLogInInfo.email}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setuserLogInInfo({

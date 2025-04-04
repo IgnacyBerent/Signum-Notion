@@ -10,6 +10,7 @@ import Projects from "./pages/projects";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import Tasks from "./pages/project/tasks";
 import Team from "./pages/project/team";
+import UserDetails from "./pages/userDetails";
 
 export const router = createBrowserRouter([
   {
@@ -18,6 +19,11 @@ export const router = createBrowserRouter([
       {
         path: "/projects",
         element: <Projects />,
+        errorElement: <Error />,
+      },
+      {
+        path: "/userDetails",
+        element: <UserDetails />,
         errorElement: <Error />,
       },
       {

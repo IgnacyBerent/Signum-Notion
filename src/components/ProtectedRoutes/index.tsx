@@ -1,6 +1,7 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { getAuth } from "firebase/auth";
+import Loading from "../ui/loading";
 
 const ProtectedRoutes = () => {
   const auth = getAuth();
@@ -8,11 +9,7 @@ const ProtectedRoutes = () => {
   const location = useLocation();
 
   if (loading) {
-    return (
-      <div className="bg-slate-900 flex justify-center items-center h-screen">
-        <div className="w-12 h-12 border-4 border-slate-200 border-dashed rounded-full animate-spin"></div>
-      </div>
-    );
+    return <Loading />;
   }
 
   return user ? (
