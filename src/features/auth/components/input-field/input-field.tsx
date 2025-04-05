@@ -11,7 +11,7 @@ interface InputFieldProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const InputField: React.FC<InputFieldProps> = ({
+export const InputField: React.FC<InputFieldProps> = ({
   id,
   label,
   type = "text",
@@ -34,5 +34,3 @@ const InputField: React.FC<InputFieldProps> = ({
     </div>
   );
 };
-
-export default InputField;

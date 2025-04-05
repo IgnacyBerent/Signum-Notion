@@ -1,5 +1,5 @@
-import { UserName } from "@/types";
-import { db } from "../config/firebaseConfig";
+import { UserName } from "@/features/auth/types";
+import { db } from "../../../config/firebaseConfig";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { useQuery } from "@tanstack/react-query";
 

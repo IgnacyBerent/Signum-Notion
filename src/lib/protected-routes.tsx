@@ -1,7 +1,7 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { getAuth } from "firebase/auth";
-import Loading from "../ui/loading";
+import { Loading } from "@/components/ui/loading";
 
 const ProtectedRoutes = () => {
   const auth = getAuth();

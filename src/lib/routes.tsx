@@ -1,16 +1,16 @@
 import { createBrowserRouter } from "react-router-dom";
-import Login from "./pages/login";
-import Board from "./pages/project/board";
-import Backlog from "./pages/project/backlog";
-import Sprints from "./pages/project/sprints";
-import Home from "./pages/home";
-import Register from "./pages/register";
-import Error from "./pages/error";
-import Projects from "./pages/projects";
-import ProtectedRoutes from "./components/ProtectedRoutes";
-import Tasks from "./pages/project/tasks";
-import Team from "./pages/project/team";
-import UserDetails from "./pages/userDetails";
+import Login from "../pages/login";
+import Board from "../pages/project/board";
+import Backlog from "../pages/project/backlog";
+import Sprints from "../pages/project/sprints";
+import Home from "../pages/home";
+import Register from "../pages/register";
+import Error from "../pages/error";
+import Projects from "../pages/projects";
+import ProtectedRoutes from "./protected-routes";
+import Tasks from "../pages/project/tasks";
+import Team from "../pages/project/team";
+import UserDetails from "../pages/userDetails";
 
 export const router = createBrowserRouter([
   {

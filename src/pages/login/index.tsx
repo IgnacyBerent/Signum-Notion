@@ -8,9 +8,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Icons } from "@/components/ui/icons";
-import InputField from "@/components/ui/inputField";
 import { useUserAuth } from "@/context/userAuthContext";
-import { UserLogIn } from "@/types";
+import { UserLogIn, InputField } from "@/features/auth";
 import * as React from "react";
 import { Link, useNavigate } from "react-router-dom";
 

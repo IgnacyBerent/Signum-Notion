@@ -1,4 +1,7 @@
-import { saveUserDetails, useDoesUserExist } from "@/api/userDetails";
+import {
+  saveUserDetails,
+  useDoesUserExist,
+} from "@/features/auth/api/userDetails";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -8,10 +11,9 @@ import {
   CardContent,
   CardFooter,
 } from "@/components/ui/card";
-import InputField from "@/components/ui/inputField";
-import Loading from "@/components/ui/loading";
+import { Loading } from "@/components/ui/loading";
 import { auth } from "@/config/firebaseConfig";
-import { UserName } from "@/types";
+import { UserName, InputField } from "@/features/auth";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
