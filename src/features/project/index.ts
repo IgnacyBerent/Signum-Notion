@@ -1,5 +1,6 @@
 // api
-export * from "./api/new-project";
+export * from "./api/create-new-project";
+export * from "./api/get-projects";
 
 // components
 

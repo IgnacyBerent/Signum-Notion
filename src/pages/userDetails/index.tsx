@@ -1,7 +1,4 @@
-import {
-  saveUserDetails,
-  useDoesUserExist,
-} from "@/features/auth/api/userDetails";
+import { useDoesUserExist, useSaveUser } from "@/features/auth";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -13,20 +10,24 @@ import {
 } from "@/components/ui/card";
 import { Loading } from "@/components/ui/loading";
 import { auth } from "@/config/firebaseConfig";
-import { UserName, InputField } from "@/features/auth";
+import { UserData, InputField } from "@/features/auth";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const initialValue: UserName = {
+const initialValue: UserData = {
+  id: "",
+  email: "",
   firstName: "",
   lastName: "",
+  projects: [],
 };
 
 const UserDetails = () => {
   const navigate = useNavigate();
-  const [userInfo, setUserInfo] = useState<UserName>(initialValue);
+  const [userInfo, setUserInfo] = useState<UserData>(initialValue);
   const uid = auth.currentUser?.uid;
   const { data: userExists, isLoading: isLoadingUser } = useDoesUserExist(uid!);
+  const { mutate: saveUser } = useSaveUser();
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -40,8 +41,12 @@ const UserDetails = () => {
     setLoading(true);
     try {
       console.log("The user info is : ", userInfo);
-      await saveUserDetails(uid!, userInfo);
-      navigate("/projects");
+      if (auth.currentUser?.email) {
+        userInfo.email = auth.currentUser.email;
+        userInfo.id = uid!;
+        saveUser(userInfo);
+        navigate("/projects");
+      }
     } catch (error) {
       console.log("Error : ", error);
     }

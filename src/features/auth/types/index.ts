@@ -9,7 +9,10 @@ export interface UserSignIn {
   confirmPassword: string;
 }
 
-export interface UserName {
+export interface UserData {
+  id: string;
+  email: string;
   firstName: string;
   lastName: string;
+  projects: string[];
 }

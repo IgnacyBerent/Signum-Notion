@@ -1,37 +1,58 @@
+import { useGetCurrentUser } from "@/features/auth/api/get-current-user";
 import { useNavigate } from "react-router-dom";
+import { auth } from "@/config/firebaseConfig";
+import { Loading } from "@/components/ui/loading";
+import { useGetProjects } from "@/features/project";
+import { useState } from "react";
+import CreateProjectPopup from "@/features/project/components/create-project-popup";
 
 const Projects = () => {
+  const uid = auth.currentUser?.uid;
   const navigate = useNavigate();
+  const { data: userData, isLoading: isLoadingUser } = useGetCurrentUser(uid!);
+  console.log("The user data is : ", userData);
+  const { data: projects, isLoading: isLoadingProjects } = useGetProjects(
+    userData?.projects || []
+  );
+  const [isOpen, setIsOpen] = useState(false);
 
-  const projects = [
-    { projectName: "New Project", projectId: "0" },
-    { projectName: "Prew", projectId: "1" },
-    { projectName: "Signum Notion", projectId: "2" },
-    { projectName: "GastroApp", projectId: "3" },
-    { projectName: "Long Project Name", projectId: "4" },
-    {
-      projectName: "Very Super Long Project Name That is Unnecessary",
-      projectId: "4",
-    },
-  ];
+  const onOpen = () => {
+    setIsOpen(true);
+  };
+  const onClose = () => {
+    setIsOpen(false);
+  };
+
+  if (isLoadingUser || isLoadingProjects) {
+    return <Loading />;
+  }
+
   return (
     <div className="bg-slate-900 w-full h-screen flex flex-col sm:px-15 md:px-25 lg:px-40 py-10 overflow-auto">
       <div className="font-extrabold text-slate-300 text-3xl mb-5 ml-2">
         Projects:
       </div>
       <div className="flex flex-wrap justify-start items-start w-full">
-        {projects.map((project) => (
+        <div
+          key={"create-new-project"}
+          onClick={onOpen}
+          className="flex bg-slate-500/50 rounded-sm shadow-sm w-50 h-50 p-1.5 m-3 justify-center items-center text-2xl text-center overflow-clip font-bold text-slate-400 hover:text-slate-200 hover:border-2 cursor-pointer"
+        >
+          Create New Project
+        </div>
+        {projects!.map((project) => (
           <div
-            id={project.projectId}
+            key={project.id}
             className="flex bg-slate-500/50 rounded-sm shadow-sm w-50 h-50 p-1.5 m-3 justify-center items-center text-2xl text-center overflow-clip font-bold text-slate-400 hover:text-slate-200 hover:border-2 cursor-pointer"
             onClick={() => {
-              navigate(`/project/${project.projectId}/sprints`);
+              navigate(`/project/${project.id}/sprints`);
             }}
           >
-            {project.projectName}
+            {project.name}
           </div>
         ))}
       </div>
+      <CreateProjectPopup uid={uid!} isOpen={isOpen} onClose={onClose} />
     </div>
   );
 };

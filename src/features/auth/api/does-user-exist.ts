@@ -1,19 +1,6 @@
-import { UserName } from "@/features/auth/types";
 import { db } from "../../../config/firebaseConfig";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { useQuery } from "@tanstack/react-query";
-
-export async function saveUserDetails(
-  uid: string,
-  userName: UserName
-): Promise<void> {
-  try {
-    const userDocRef = doc(db, "users", uid);
-    await setDoc(userDocRef, userName);
-  } catch (e) {
-    console.error("Error adding document: ", e);
-  }
-}
 
 export async function doesUserExist(uid: string): Promise<boolean> {
   try {
@@ -28,7 +15,7 @@ export async function doesUserExist(uid: string): Promise<boolean> {
 
 export const useDoesUserExist = (uid: string) => {
   const { data, isFetching, isFetched } = useQuery({
-    queryKey: ["user", uid],
+    queryKey: ["doesUserExist", uid],
     queryFn: () => doesUserExist(uid),
   });
 
