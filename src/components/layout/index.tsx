@@ -21,7 +21,7 @@ const Layout = ({ children }: Props) => {
   };
 
   return (
-    <div className="flex bg-slate-900">
+    <div className="flex bg-slate-900 max-h-screen overflow-auto">
       <aside
         className={`fixed top-0 left-0 z-40 h-screen border-r border-slate-200/10 bg-slate-800/50 transition-all duration-500 ${
           collapsed ? "w-12" : "w-60"
@@ -32,7 +32,7 @@ const Layout = ({ children }: Props) => {
         </div>
       </aside>
       <div
-        className={`flex-1 p-8 transition-all duration-500 ${
+        className={`flex-1 px-30 py-20 transition-all duration-500 ${
           collapsed ? "ml-10" : "ml-60"
         } h-screen`}
       >
