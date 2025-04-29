@@ -43,7 +43,7 @@ const RowSpirnts = (props: Props) => {
         </div>
       </td>
       <td className={tdClass}>
-        <div className="flex -mr-25 gap-2 items-center">
+        <div className="flex gap-2 items-center max-w-60 overflow-x-hidden">
           {props.dateS.toLocaleDateString("en-US", {
             year: "numeric",
             month: "long",
@@ -58,7 +58,7 @@ const RowSpirnts = (props: Props) => {
         </div>
       </td>
       <td className={tdClass}>
-        <div className="max-w-20">{props.totalTasks}</div>
+        <div className="max-w-25">{props.totalTasks}</div>
       </td>
       <td className={tdClass}>
         <div className="flex gap-3 items-center mr-40">
