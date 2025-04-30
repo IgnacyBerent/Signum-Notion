@@ -32,7 +32,7 @@ const Layout = ({ children }: Props) => {
         </div>
       </aside>
       <div
-        className={`flex-1 2xl:px-30 xl:px-15 py-20 transition-all duration-500 ${
+        className={`flex-1 2xl:px-30 xl:px-15 pt-15 mb-10 overflow-visible transition-all duration-500 ${
           collapsed ? "ml-10" : "ml-60"
         } h-screen`}
       >

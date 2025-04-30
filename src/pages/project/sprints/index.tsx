@@ -1,5 +1,6 @@
 import Layout from "@/components/layout";
 import ColumnTitle from "@/features/project/components/column-title";
+import { NewSprintRow } from "@/features/project/components/new-sprint-row";
 import PageLabel from "@/features/project/components/page-label";
 import RowSpirnts from "@/features/project/components/row-sprints";
 import {
@@ -11,7 +12,7 @@ import {
   BiListCheck,
 } from "react-icons/bi";
 
-const sprints = [1, 2, 3];
+const sprints = [1, 2, 3, 4, 5];
 
 const Sprints = () => {
   return (
@@ -60,18 +61,7 @@ const Sprints = () => {
                 completedTasks={5}
               />
             ))}
-            <tr className="hover:bg-slate-800/50 cursor-pointer">
-              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-white/40 border-b border-white/10">
-                <div className="flex gap-2 items-center">
-                  <div className="text-2xl -mt-0.5">+</div>
-                  <div>New Sprint</div>
-                </div>
-              </td>
-              <td className="border-b border-white/10" />
-              <td className="border-b border-white/10" />
-              <td className="border-b border-white/10" />
-              <td className="border-b border-white/10" />
-            </tr>
+            <NewSprintRow />
           </tbody>
         </table>
       </div>
