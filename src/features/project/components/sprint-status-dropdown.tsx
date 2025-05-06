@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { StatusBox } from "./status-box";
 import { SprintStatus } from "../types";
@@ -14,13 +14,22 @@ export default function SprintStatusDropdown(props: Props) {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ top: 0, left: 0 });
 
-  // Set dropdown position based on button position
-  useEffect(() => {
-    if (props.open && props.tabRef!.current) {
-      const rect = props.tabRef!.current.getBoundingClientRect();
+  // Measure the dropdown and set its position (above if not enough space below)
+  useLayoutEffect(() => {
+    if (props.open && props.tabRef?.current && dropdownRef.current) {
+      const refRect = props.tabRef.current.getBoundingClientRect();
+      let newTop;
+
+      // If the space below doesn't fit the dropdown, position it above.
+      if (refRect.bottom + 65 > window.innerHeight) {
+        newTop = refRect.top + window.scrollY - 77.5;
+      } else {
+        newTop = refRect.bottom + window.scrollY;
+      }
+
       setPosition({
-        top: rect.bottom + window.scrollY,
-        left: rect.left + window.scrollX,
+        top: newTop,
+        left: refRect.left + window.scrollX,
       });
     }
   }, [props.open, props.tabRef]);
@@ -52,33 +61,43 @@ export default function SprintStatusDropdown(props: Props) {
     };
   }, [props.open]);
 
-  return createPortal(
-    <div
-      ref={dropdownRef}
-      className="flex absolute flex-col -mt-3.5 px-2 py-1 bg-slate-950 rounded-md shadow-lg z-[9999]"
-      style={{
-        top: position.top,
-        left: position.left,
-      }}
-    >
-      <span className="mb-3 text-sm font-medium text-slate-200/80">
-        Select Status:
-      </span>
-      <div className="flex">
-        {["Current", "Completed", "Next", "Future"].map((status) => (
-          <div
-            key={status}
-            onClick={() => {
-              props.selectValue(status as SprintStatus);
-              props.setOpen(false);
-            }}
-            className="flex py-1 px-2 items-center rounded-md hover:bg-slate-800/50 cursor-pointer"
-          >
-            <StatusBox status={status as SprintStatus} />
+  return (
+    <>
+      {createPortal(
+        <div className="fixed inset-0 z-[9997] bg-transparent cursor-default" />,
+        document.body
+      )}{" "}
+      {createPortal(
+        <div
+          ref={dropdownRef}
+          className="flex absolute flex-col px-2 py-1 bg-slate-950 rounded-md shadow-lg z-[9999]"
+          style={{
+            top: position.top,
+            left: position.left,
+          }}
+        >
+          <div className="flex justify-between mb-3 text-sm font-medium text-slate-200/80">
+            Select Status:
+            <button className="hover:text-slate-200/20">X</button>
           </div>
-        ))}
-      </div>
-    </div>,
-    document.body
+          <div className="flex">
+            {["Current", "Completed", "Next", "Future"].map((status) => (
+              <div
+                key={status}
+                onClick={() => {
+                  props.selectValue(status as SprintStatus);
+                  props.setOpen(false);
+                }}
+                className="flex py-1 px-2 items-center rounded-md hover:bg-slate-800/50 cursor-pointer"
+              >
+                <StatusBox status={status as SprintStatus} />
+              </div>
+            ))}
+          </div>
+        </div>,
+        document.body
+      )}
+      ;
+    </>
   );
 }
